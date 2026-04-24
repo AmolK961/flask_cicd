@@ -37,9 +37,12 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Run unit tests
-      run: |
-        pytest tests/ -v --cov=app --cov-report=xml  # Assumes tests/ dir or test_app.py
+    -name: Run unit tests
+             - run: |
+             - pip install pytest pytest-cov
+             - pytest tests/ -v
+             - # Optional: coverage (uncomment after)
+             - # pytest tests/ -v --cov=app --cov-report=xml
 
   docker:
     needs: test  # Run only if tests pass
